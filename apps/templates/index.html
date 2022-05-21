@@ -1,0 +1,19 @@
+{% extends "base_centered.html" %}
+
+{% block local_css %}
+{% load static %}
+<!-- Link to app-specific CSS -->
+<!-- <link rel="stylesheet" href="{% static 'your_app/css/app.css' %}"> -->
+{% endblock %}
+
+{% block tab_title %}Title from index.html{% endblock %}
+{% block centered_content %}
+    <h1 class="mt-2">Content Heading</h1>
+
+    <p class="mt-5 mb-5">
+    {% block page_content %}
+        Place your content here.
+    {% endblock %}
+    </p>
+</div>
+{% endblock %}

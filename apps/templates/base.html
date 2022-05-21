@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>
+        {% block tab_title %}
+        Title from base.html
+        {% endblock %}
+    </title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Google Fonts -->
+    <!-- <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;700&display=swap"
+        rel="stylesheet"> -->
+
+    
+    {% load static %}
+
+    <!-- Bootstrap 5 -->
+    <link rel="stylesheet" href="{% static 'site/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'site/css/site.css' %}">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{% static 'site/images/favicon.ico' %}" type="image/x-icon">
+    
+    {% block local_css %}{% endblock %}
+</head>
+
+<body class="{% block body_class %}{% endblock %}">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-md navbar-light sticky-top bs-bg3">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse bs-bg3" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link bs-fg2"
+                            href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link bs-fg2"
+                            href="#">About</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle bs-fg2" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Dropdown
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Sub Menu 1</a></li>
+                            <li><a class="dropdown-item" href="#">Sub Menu 2</a></li>
+                            <li><a class="dropdown-item" href="#">Sub Menu 3</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid mt-2 text-center">
+            {% load static %}
+            {% block logo %}
+            <!-- Link to your logo image
+            <img class="logo" src="{% static 'site/images/logo.png' %}" alt="logo"> -->
+            {% endblock %}
+        </div>
+
+    <div class="ms-4 me-4 mb-4 mt-2">
+        
+        {% block content %}{% endblock %}
+    </div>
+
+    <footer id="footer" class="mt-5">
+        <hr />
+        <div class="container-fluid text-center">
+            <p>&copy; Copyright {% now "Y" %}</p>
+        </div>
+    </footer>
+
+    {% load static %}
+
+    <!-- Bootstrap 5 -->
+    <script src="{% static 'site/js/bootstrap.bundle.min.js' %}"></script>
+
+</body>
+
+</html>

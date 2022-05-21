@@ -8,7 +8,7 @@
 FROM python:3.10-alpine as builder
 
 # Set work directory
-WORKDIR /usr/src/app
+WORKDIR /usr/src/apps
 
 # Python Environment Variables
 ENV PYTHONDONTWRITEBYTECODE 1
@@ -22,7 +22,7 @@ RUN apk update && apk add musl-dev gcc libffi-dev postgresql-dev python3-dev
 
 # Install from requirements.txt
 COPY ./requirements.txt .
-RUN pip wheel --no-cache-dir --no-deps --wheel-dir /usr/src/app/wheels -r requirements.txt
+RUN pip wheel --no-cache-dir --no-deps --wheel-dir /usr/src/apps/wheels -r requirements.txt
 
 #########
 # FINAL #
@@ -31,43 +31,43 @@ RUN pip wheel --no-cache-dir --no-deps --wheel-dir /usr/src/app/wheels -r requir
 # Python base image
 FROM python:3.10-alpine
 
-# create directory for the app user
-RUN mkdir -p /home/app
+# create directory for the apps user
+RUN mkdir -p /home/apps
 
 # Upgrade pip
 RUN pip install --upgrade pip
 
-# create the app user
-RUN addgroup -S app && adduser -S app -G app
+# create the apps user
+RUN addgroup -S apps && adduser -S apps -G apps
 
-# create the appropriate directories
-ENV HOME=/home/app
-ENV APP_HOME=/home/app/web
-RUN mkdir $APP_HOME
-RUN mkdir $APP_HOME/static
-WORKDIR $APP_HOME
+# create the appsropriate directories
+ENV HOME=/home/apps
+ENV apps_HOME=/home/apps/web
+RUN mkdir $apps_HOME
+RUN mkdir $apps_HOME/static
+WORKDIR $apps_HOME
 
 # install dependencies
 RUN apk update && apk add libpq
-COPY --from=builder /usr/src/app/wheels /wheels
-COPY --from=builder /usr/src/app/requirements.txt .
+COPY --from=builder /usr/src/apps/wheels /wheels
+COPY --from=builder /usr/src/apps/requirements.txt .
 RUN pip install --no-cache /wheels/*
 
 # copy project
-COPY . $APP_HOME
+COPY . $apps_HOME
 
 # copy entrypoint.sh
-COPY ./entrypoint.sh $APP_HOME
+COPY ./entrypoint.sh $apps_HOME
 
-# chown all the files to the app user
-RUN chown -R app:app $APP_HOME
+# chown all the files to the apps user
+RUN chown -R apps:apps $apps_HOME
 
 # chown for static volume
 RUN mkdir /static
-RUN chown app:app /static
+RUN chown apps:apps /static
 
-# change to the app user
-USER app
+# change to the apps user
+USER apps
 
 # run entrypoint.sh
-ENTRYPOINT ["sh", "/home/app/web/entrypoint.sh"]
+ENTRYPOINT ["sh", "/home/apps/web/entrypoint.sh"]
