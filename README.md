@@ -5,7 +5,7 @@ Starting template for a Dockerized Django project. Includes minified files for B
 db = Postgres database<br>
 db_backup = Scheduled backups for db container<br>
 web = Django project served by gunicorn<br>
-nginx = reverse proxy and static file server
+nginx = reverse proxy, load balancer and static file server
 <br><br>
 
 ## Prerequisites (run once per computer)
