@@ -14,7 +14,7 @@ nginx = reverse proxy, load balancer and static file server
 1. pip install docker-compose
 
 ## Prerequisites (run for every Django project)
-1. Delete the hidden folder ".git"
+1. Delete the hidden folder ".git" if it exists.
 1. Rename "django-start" folder to your project's name.
 1. Change the 'name' value on line 2 of pyproject.toml to your project's name.
 1. py generate_secretkey.py
@@ -24,7 +24,7 @@ nginx = reverse proxy, load balancer and static file server
     1. Replace value for 'DB_NAME' with your database name.
     1. Replace value for 'DB_USER' with your database username.
     1. Replace value for 'DB_PASSWORD' with your database user's password.
-
+1. Check the file "/app/entrypoint.sh" in VS Code. If the file is using CRLF line endings, change it to LF. You can do this by clicking on CRLF in the lower right corner in VS Code. If this is not done, the web container will not build.
 
 ## Usage
 1. Start Docker

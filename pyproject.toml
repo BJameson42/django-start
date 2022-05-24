@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "django-start-v2"
+name = "django-start"
 version = "0.1.0"
 description = ""
 authors = ["Brian Jameson <brianjameson42@gmail.com>"]
